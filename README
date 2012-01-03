@@ -29,3 +29,4 @@ Add the atmosphere.js file to your html file. The following code snippet provide
 var xPos = 100, yPos = 150, scale = 1.0;
 var cloud = new Atmosphere.Cloud(context, xPos, yPos, scale); // Where context is a 2d context provided by a canvas object.
 cloud.draw();
+
