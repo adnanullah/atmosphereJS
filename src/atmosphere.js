@@ -1,5 +1,55 @@
 var Atmosphere = {};
 
+Atmosphere.Sun = function (context, x, y, ratio) {
+    "use strict";
+
+    return new function () {
+        this.settings = { context: context, xPos: x || 0, yPos: y || 0, radius: 40, sizeRatio: ratio || 1.0, fillStyle: '#ffd700' };
+
+        var cfg = this.settings;
+        cfg.xPos = x;
+        cfg.yPos = y;
+
+        var ctx = cfg.context,
+            sunRadius = cfg.radius * cfg.sizeRatio;
+
+        this.draw = function () {
+            ctx.save();
+
+            // Initialise drawing settings
+            ctx.fillStyle = cfg.fillStyle;
+            ctx.shadowColor = cfg.fillStyle;
+            ctx.shadowBlur = 28;
+
+            // Draw main arc
+            ctx.beginPath();
+            ctx.moveTo(cfg.xPos, cfg.yPos);
+            ctx.arc(cfg.xPos, cfg.yPos, sunRadius, Math.PI, Math.PI - 0.0001);
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#ffffff';
+            ctx.fillStyle = '#ffffe0';
+            ctx.arc(cfg.xPos, cfg.yPos, sunRadius - 2, Math.PI, Math.PI-0.0001);
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            var gradient = ctx.createLinearGradient(0, 0, 0, sunRadius * 4);
+            gradient.addColorStop(0, '#ffa500');
+            gradient.addColorStop(1, '#ffff00');
+            ctx.fillStyle = gradient; 
+            ctx.arc(cfg.xPos, cfg.yPos, sunRadius - 3, Math.PI, Math.PI - 0.0001);
+            ctx.fill();
+            ctx.closePath();	
+            
+            ctx.restore();
+        };
+    };
+};
+
 Atmosphere.Cloud = function (context, x, y, ratio) {
     "use strict";
 
@@ -15,12 +65,14 @@ Atmosphere.Cloud = function (context, x, y, ratio) {
             midRadius = topRadius * 0.5529,
             bottomRadius = topRadius * 0.8;
 
-        // Initialise drawing settings
-        ctx.lineWidth = cfg.lineWidth;
-        ctx.fillStyle = cfg.fillStyle;
-
         this.draw = function () {
             ctx.save();
+
+            // Initialise drawing settings
+            ctx.lineWidth = cfg.lineWidth;
+            ctx.fillStyle = cfg.fillStyle;
+            ctx.shadowBlur = 0;
+
             ctx.beginPath();
             
             // Draw main arc
@@ -39,7 +91,7 @@ Atmosphere.Cloud = function (context, x, y, ratio) {
             ctx.moveTo(xBotLeft, yBotLeft);
             ctx.arc(xBotLeft, yBotLeft, bottomRadius, Math.PI * 0.5, Math.PI * 1.5);
             
-	    // Draw bottom-right arc
+            // Draw bottom-right arc
             var xBotRight = cfg.xPos + topRadius - (midRadius / 2),
                 yBotRight = yBotLeft;
             ctx.moveTo(xBotRight, yBotRight);
