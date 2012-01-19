@@ -50,6 +50,56 @@ Atmosphere.Sun = function (context, x, y, ratio) {
     };
 };
 
+Atmosphere.Moon = function (context, x, y, ratio) {
+    "use strict";
+
+    return new function () {
+        this.settings = { context: context, xPos: x || 0, yPos: y || 0, radius: 40, sizeRatio: ratio || 1.0, fillStyle: '#fff' };
+
+        var cfg = this.settings;
+        cfg.xPos = x;
+        cfg.yPos = y;
+
+        var ctx = cfg.context,
+            moonRadius = cfg.radius * cfg.sizeRatio;
+
+        this.draw = function () {
+            ctx.save();
+
+            // Initialise drawing settings
+            ctx.fillStyle = cfg.fillStyle;
+            ctx.shadowColor = cfg.fillStyle;
+            ctx.shadowBlur = 28;
+
+            // Draw main arc
+            ctx.beginPath();
+            ctx.moveTo(cfg.xPos, cfg.yPos);
+            ctx.arc(cfg.xPos, cfg.yPos, moonRadius, Math.PI, Math.PI - 0.0001);
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#ffffff';
+            ctx.fillStyle = '#c0c0c0';
+            ctx.arc(cfg.xPos, cfg.yPos, moonRadius - 2, Math.PI, Math.PI-0.0001);
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            var gradient = ctx.createLinearGradient(0, 0, 0, moonRadius * 4);
+            gradient.addColorStop(0, '#f0f0f0');
+            gradient.addColorStop(1, '#b0b0b0');
+            ctx.fillStyle = gradient; 
+            ctx.arc(cfg.xPos, cfg.yPos, moonRadius - 3, Math.PI, Math.PI - 0.0001);
+            ctx.fill();
+            ctx.closePath();	
+
+            ctx.restore();
+        };
+    };
+};
+
 Atmosphere.Cloud = function (context, x, y, ratio) {
     "use strict";
 
