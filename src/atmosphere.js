@@ -128,7 +128,7 @@ Atmosphere.Sun = function (context, x, y, ratio) {
 
 
 
-Atmosphere.Moon = function (context, x, y, ratio, tint, glow) {
+Atmosphere.Moon = function (context, x, y, ratio, tint) {
     "use strict";
 
     return new function () {
