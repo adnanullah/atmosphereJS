@@ -7,26 +7,30 @@ Welcome to the AtmosphereJS Wiki/FAQ!
 AtmosphereJS is a simple HTML5/Canvas API drawing library that allows users to create sky lines and atmospheric effects.
 
 ### So... what's available?
-Not much at the moment, creation of scalable clouds is kind of working and more features are planned for the future (see below).
+Not much at the moment, creation of:
+
+* Scalable clouds
+* Scalable sun
+* Scalable moon
+
+with more features are planned for the future (see below).
 
 ### Why create it?
 I've created AtmosphereJS as a learning exercise, to help improve my knowledge of HTML5, JavaScript frameworks and the Canvas API.
 
 ### What's planned?
 
-The following drawable items are currently planned: 
+The following items are currently planned: 
 
-* A Sun 
-* The moon 
 * Stars 
 * Rain 
-* Animation applicable to all of the above.
+* Animation
 
 ## Getting started
 
 Add the atmosphere.js file to your html file. The following code snippet provides an example of usage:
 
 var xPos = 100, yPos = 150, scale = 1.0;
-var cloud = new Atmosphere.Cloud(context, xPos, yPos, scale); // Where context is a 2d context provided by a canvas object.
+var cloud = new Atmosphere.Cloud(context, x, y, ratio); // Where context is a 2d context provided by a canvas object.
 cloud.draw();
 
