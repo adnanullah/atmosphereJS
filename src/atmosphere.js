@@ -1,7 +1,7 @@
 var Atmosphere = {};
 
 Atmosphere.Sun = function (context, x, y, ratio) {
-    "use strict";
+    'use strict';
 
     return new function () {
         this.settings = {
@@ -31,24 +31,24 @@ Atmosphere.Sun = function (context, x, y, ratio) {
             ctx.save();
 
             // Initialise drawing settings
-            ctx.shadowColor = "rgb(255, 255, 255)";
+            ctx.shadowColor = 'rgb(255, 255, 255)';
             ctx.shadowBlur = 20;
 
             ctx.beginPath();
             ctx.moveTo(sunSize, sunSize);
             ctx.arc(sunSize, sunSize, sunSize, Math.PI, Math.PI - 0.0001);
             ctx.closePath();
-            ctx.fillStyle = "rgb(255, 255, 2)";
+            ctx.fillStyle = 'rgb(255, 255, 2)';
             ctx.fill();
 
-            ctx.shadowColor = "rgb(255, 255, 2)";
+            ctx.shadowColor = 'rgb(255, 255, 2)';
             ctx.shadowBlur = sunSize;
 
             ctx.beginPath();
             ctx.moveTo(sunSize, sunSize);
             ctx.arc(sunSize, sunSize, sunSize, Math.PI, Math.PI - 0.0001);
             ctx.closePath();
-            ctx.fillStyle = "rgb(255, 255, 2)";
+            ctx.fillStyle = 'rgb(255, 255, 2)';
             ctx.fill();
             ctx.restore();
 
@@ -62,9 +62,9 @@ Atmosphere.Sun = function (context, x, y, ratio) {
             ctx.bezierCurveTo(sunSize * 1.55213, sunSize * 0.0, sunSize * 2.0, sunSize * 0.44786, sunSize * 2.0, sunSize * 1.0);
             ctx.closePath();
             gradient = ctx.createRadialGradient(sunSize, sunSize, 0.0, sunSize, sunSize, sunSize);
-            gradient.addColorStop(0.00, "rgba(240, 89, 35, 0.65)");
-            gradient.addColorStop(0.82, "rgba(243, 118, 32, 0.65)");
-            gradient.addColorStop(1.00, "rgba(246, 146, 29, 0.65)");
+            gradient.addColorStop(0.00, 'rgba(240, 89, 35, 0.65)');
+            gradient.addColorStop(0.82, 'rgba(243, 118, 32, 0.65)');
+            gradient.addColorStop(1.00, 'rgba(246, 146, 29, 0.65)');
             ctx.fillStyle = gradient;
             ctx.fill();
 
@@ -82,7 +82,7 @@ Atmosphere.Sun = function (context, x, y, ratio) {
             ctx.bezierCurveTo(sunSize * 0.33504, sunSize * 1.72763, sunSize * 0.20113, sunSize * 1.58461, sunSize * 0.20113, sunSize * 1.54074);
             ctx.bezierCurveTo(sunSize * 0.20113, sunSize * 1.51908, sunSize * 0.22849, sunSize * 1.42222, sunSize * 0.38917, sunSize * 1.48148);
             ctx.closePath();
-            ctx.fillStyle = "rgb(255, 150, 0)";
+            ctx.fillStyle = 'rgb(255, 150, 0)';
             ctx.fill();
 
             // Glare
@@ -99,8 +99,8 @@ Atmosphere.Sun = function (context, x, y, ratio) {
             ctx.bezierCurveTo(sunSize * 0.95213, sunSize * 0.02792, sunSize * 1.02849, sunSize * 0.03361, sunSize * 1.10085, sunSize * 0.04444);
             ctx.closePath();
             gradient = ctx.createLinearGradient(sunSize * 1.21139, sunSize * 0.54415, sunSize * 1.52421, sunSize * 0.18461);
-            gradient.addColorStop(0.00, "rgba(255, 255, 255, 0)");
-            gradient.addColorStop(1.00, "rgba(255, 255, 255, 1)");
+            gradient.addColorStop(0.00, 'rgba(255, 255, 255, 0)');
+            gradient.addColorStop(1.00, 'rgba(255, 255, 255, 1)');
             ctx.fillStyle = gradient;
             ctx.fill();
 
@@ -114,9 +114,9 @@ Atmosphere.Sun = function (context, x, y, ratio) {
             ctx.bezierCurveTo(sunSize * 1.52877, sunSize * 0.01139, sunSize * 1.96011, sunSize * 0.44615, sunSize * 1.96011, sunSize * 0.9829);
             ctx.closePath();
             gradient = ctx.createLinearGradient(sunSize * 0.99715, sunSize * 1.95441, sunSize * 0.99715, sunSize * 0.01139);
-            gradient.addColorStop(0.33, "rgba(255, 255, 255, 0)");
-            gradient.addColorStop(0.63, "rgba(255, 255, 255, 0.5)");
-            gradient.addColorStop(1.00, "rgba(255, 255, 255, 1)");
+            gradient.addColorStop(0.33, 'rgba(255, 255, 255, 0)');
+            gradient.addColorStop(0.63, 'rgba(255, 255, 255, 0.5)');
+            gradient.addColorStop(1.00, 'rgba(255, 255, 255, 1)');
             ctx.fillStyle = gradient;
             ctx.fill();
             ctx.restore();
@@ -129,7 +129,7 @@ Atmosphere.Sun = function (context, x, y, ratio) {
 
 
 Atmosphere.Moon = function (context, x, y, ratio, tint) {
-    "use strict";
+    'use strict';
 
     return new function () {
         this.settings = {
@@ -942,69 +942,148 @@ Atmosphere.Moon = function (context, x, y, ratio, tint) {
     };
 };
 
-Atmosphere.Cloud = function (context, x, y, ratio) {
-    "use strict";
+Atmosphere.Cloud = function (context, x, y, ratio, tint) {
+    'use strict';
 
     return new function () {
-        this.settings = {
-            context: context,
-            xPos: x || 0,
-            yPos: y || 0,
-            radius: 40,
-            sizeRatio: ratio || 1.0,
-            lineWidth: 5,
-            fillStyle: '#fff'
-        };
-
-        var cfg = this.settings;
-        cfg.xPos = x;
-        cfg.yPos = y;
-
-        var ctx = cfg.context,
-            topRadius = cfg.radius * cfg.sizeRatio,
-            midRadius = topRadius * 0.5529,
-            bottomRadius = topRadius * 0.8;
 
         this.draw = function () {
+            this.settings = {
+                context: context,
+                xPos: x || 0,
+                yPos: y || 0,
+                sizeRatio: ratio || 1.0,
+                tint: tint || '#999'
+            };
+
+            var cfg = this.settings;
+            var ctx = cfg.context;
+
+            var cloudSize = 120;
+
+            ctx.scale(cfg.sizeRatio, cfg.sizeRatio);
+            var transX = cfg.xPos + (cloudSize * -1.38889),
+                transY = cfg.yPos + (cloudSize * -0.80556);
+            ctx.translate(transX, transY);
             ctx.save();
 
-            // Initialise drawing settings
-            ctx.lineWidth = cfg.lineWidth;
-            ctx.fillStyle = cfg.fillStyle;
-            ctx.shadowBlur = 0;
+            var alpha = ctx.globalAlpha;
+            var gradient;
 
+            // Cloud
+            ctx.save();
             ctx.beginPath();
-
-            // Draw main arc
-            ctx.moveTo(cfg.xPos, cfg.yPos);
-            ctx.arc(cfg.xPos, cfg.yPos, topRadius, Math.PI, 0);
-
-            // Draw minor arc
-            var xMid = cfg.xPos - (topRadius + (topRadius * 0.2588)),
-                yMid = cfg.yPos;
-            ctx.moveTo(xMid, yMid);
-            ctx.arc(xMid, yMid, midRadius, Math.PI, 0);
-
-            // Draw bottom-left arc     
-            var xBotLeft = xMid - (midRadius / 2),
-                yBotLeft = yMid + bottomRadius * 0.94;
-            ctx.moveTo(xBotLeft, yBotLeft);
-            ctx.arc(xBotLeft, yBotLeft, bottomRadius, Math.PI * 0.5, Math.PI * 1.5);
-
-            // Draw bottom-right arc
-            var xBotRight = cfg.xPos + topRadius - (midRadius / 2),
-                yBotRight = yBotLeft;
-            ctx.moveTo(xBotRight, yBotRight);
-            ctx.arc(xBotRight, yBotRight, bottomRadius, Math.PI * 1.5, Math.PI * 0.5);
-
-            // Fill the rest of the cloud
-            ctx.moveTo(xBotLeft, yBotLeft + bottomRadius);
-            ctx.rect(xBotLeft, yBotLeft - bottomRadius, (topRadius * 2) + (topRadius * 0.2588), 2 * bottomRadius);
-
+            ctx.moveTo(cloudSize * 3.01333, cloudSize * 1.39166);
+            ctx.bezierCurveTo(cloudSize * 2.94222, cloudSize * 1.30222, cloudSize * 2.82166, cloudSize * 1.28333, cloudSize * 2.82166, cloudSize * 1.28333);
+            ctx.bezierCurveTo(cloudSize * 2.83444, cloudSize * 1.21722, cloudSize * 2.79388, cloudSize * 0.925, cloudSize * 2.52166, cloudSize * 0.85555);
+            ctx.bezierCurveTo(cloudSize * 2.20333, cloudSize * 0.77444, cloudSize * 2.03277, cloudSize * 1.09166, cloudSize * 2.03277, cloudSize * 1.09166);
+            ctx.bezierCurveTo(cloudSize * 2.03277, cloudSize * 1.09166, cloudSize * 1.91166, cloudSize * 0.97833, cloudSize * 1.77999, cloudSize * 1.07222);
+            ctx.bezierCurveTo(cloudSize * 1.66333, cloudSize * 1.15555, cloudSize * 1.69388, cloudSize * 1.26944, cloudSize * 1.69388, cloudSize * 1.26944);
+            ctx.bezierCurveTo(cloudSize * 1.69388, cloudSize * 1.26944, cloudSize * 1.41888, cloudSize * 1.34444, cloudSize * 1.41888, cloudSize * 1.59166);
+            ctx.bezierCurveTo(cloudSize * 1.41888, cloudSize * 1.88888, cloudSize * 1.69388, cloudSize * 1.90277, cloudSize * 1.69388, cloudSize * 1.90277);
+            ctx.lineTo(cloudSize * 2.80222, cloudSize * 1.90277);
+            ctx.bezierCurveTo(cloudSize * 2.80222, cloudSize * 1.90277, cloudSize * 2.92777, cloudSize * 1.885, cloudSize * 3.01722, cloudSize * 1.78777);
+            ctx.bezierCurveTo(cloudSize * 3.10777, cloudSize * 1.68888, cloudSize * 3.08833, cloudSize * 1.59166, cloudSize * 3.08833, cloudSize * 1.59166);
+            ctx.bezierCurveTo(cloudSize * 3.08833, cloudSize * 1.59166, cloudSize * 3.10222, cloudSize * 1.50277, cloudSize * 3.01333, cloudSize * 1.39166);
             ctx.closePath();
+            ctx.fillStyle = '#fff';
             ctx.fill();
             ctx.restore();
-            //ctx.translate(cfg.xPos * -1, cfg.yPos * -1);
+
+            // Base shadow
+            ctx.save();
+            ctx.globalAlpha = alpha * 0.20;
+            ctx.beginPath();
+            ctx.moveTo(cloudSize * 2.99222, cloudSize * 1.38833);
+            ctx.bezierCurveTo(cloudSize * 2.92277, cloudSize * 1.30111, cloudSize * 2.805, cloudSize * 1.28222, cloudSize * 2.805, cloudSize * 1.28222);
+            ctx.bezierCurveTo(cloudSize * 2.81722, cloudSize * 1.21777, cloudSize * 2.77777, cloudSize * 0.93222, cloudSize * 2.51166, cloudSize * 0.86388);
+            ctx.bezierCurveTo(cloudSize * 2.19944, cloudSize * 0.78444, cloudSize * 2.03333, cloudSize * 1.095, cloudSize * 2.03333, cloudSize * 1.095);
+            ctx.bezierCurveTo(cloudSize * 2.03333, cloudSize * 1.095, cloudSize * 1.91444, cloudSize * 0.98388, cloudSize * 1.78555, cloudSize * 1.07611);
+            ctx.bezierCurveTo(cloudSize * 1.67166, cloudSize * 1.15722, cloudSize * 1.70166, cloudSize * 1.26888, cloudSize * 1.70166, cloudSize * 1.26888);
+            ctx.bezierCurveTo(cloudSize * 1.70166, cloudSize * 1.26888, cloudSize * 1.43277, cloudSize * 1.34222, cloudSize * 1.43277, cloudSize * 1.58333);
+            ctx.bezierCurveTo(cloudSize * 1.43277, cloudSize * 1.87388, cloudSize * 1.70166, cloudSize * 1.88777, cloudSize * 1.70166, cloudSize * 1.88777);
+            ctx.lineTo(cloudSize * 2.78611, cloudSize * 1.88777);
+            ctx.bezierCurveTo(cloudSize * 2.78611, cloudSize * 1.88777, cloudSize * 2.90888, cloudSize * 1.87, cloudSize * 2.99611, cloudSize * 1.775);
+            ctx.bezierCurveTo(cloudSize * 3.085, cloudSize * 1.67833, cloudSize * 3.06555, cloudSize * 1.58333, cloudSize * 3.06555, cloudSize * 1.58333);
+            ctx.bezierCurveTo(cloudSize * 3.06555, cloudSize * 1.58333, cloudSize * 3.07944, cloudSize * 1.49666, cloudSize * 2.99222, cloudSize * 1.38833);
+            ctx.closePath();
+            gradient = ctx.createLinearGradient(cloudSize * 2.25, cloudSize * 0.85111, cloudSize * 2.25, cloudSize * 1.88777);
+            gradient.addColorStop(0.1, '#fff');
+            gradient.addColorStop(1.00, cfg.tint);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            ctx.restore();
+
+            // Shadows (Minor arc)
+            ctx.save();
+            ctx.globalAlpha = alpha * 0.05;
+            ctx.beginPath();
+            ctx.moveTo(cloudSize * 1.88055, cloudSize * 1.045);
+            ctx.bezierCurveTo(cloudSize * 1.84833, cloudSize * 1.045, cloudSize * 1.78166, cloudSize * 1.08333, cloudSize * 1.76277, cloudSize * 1.13722);
+            ctx.bezierCurveTo(cloudSize * 1.75, cloudSize * 1.17388, cloudSize * 1.75833, cloudSize * 1.20777, cloudSize * 1.74888, cloudSize * 1.21944);
+            ctx.bezierCurveTo(cloudSize * 1.73111, cloudSize * 1.24222, cloudSize * 1.70111, cloudSize * 1.28555, cloudSize * 1.69888, cloudSize * 1.26388);
+            ctx.bezierCurveTo(cloudSize * 1.68722, cloudSize * 1.12333, cloudSize * 1.79444, cloudSize * 1.04444, cloudSize * 1.89277, cloudSize * 1.04444);
+            ctx.bezierCurveTo(cloudSize * 1.99055, cloudSize * 1.04444, cloudSize * 1.945, cloudSize * 1.045, cloudSize * 1.88055, cloudSize * 1.045);
+            ctx.closePath();
+            gradient = ctx.createLinearGradient(cloudSize * 1.94944, cloudSize * 1.15722, cloudSize * 1.69833, cloudSize * 1.15722);
+            gradient.addColorStop(0.00, '#fff');
+            gradient.addColorStop(0.66, '#7f7f7f');
+            gradient.addColorStop(1.00, cfg.tint);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+
+            // Shadows (Major arc)
+            ctx.beginPath();
+            ctx.globalAlpha = alpha * 0.15;
+            ctx.moveTo(cloudSize * 2.36222, cloudSize * 0.86166);
+            ctx.bezierCurveTo(cloudSize * 2.30499, cloudSize * 0.885, cloudSize * 2.23444, cloudSize * 0.91944, cloudSize * 2.20166, cloudSize * 0.96277);
+            ctx.bezierCurveTo(cloudSize * 2.12222, cloudSize * 1.06888, cloudSize * 2.15888, cloudSize * 1.05166, cloudSize * 2.13222, cloudSize * 1.06444);
+            ctx.bezierCurveTo(cloudSize * 2.05944, cloudSize * 1.09888, cloudSize * 2.01222, cloudSize * 1.12666, cloudSize * 2.03944, cloudSize * 1.08777);
+            ctx.bezierCurveTo(cloudSize * 2.16555, cloudSize * 0.90722, cloudSize * 2.315, cloudSize * 0.825, cloudSize * 2.48333, cloudSize * 0.85222);
+            ctx.bezierCurveTo(cloudSize * 2.49166, cloudSize * 0.85388, cloudSize * 2.42333, cloudSize * 0.83666, cloudSize * 2.36222, cloudSize * 0.86166);
+            ctx.closePath();
+            gradient = ctx.createLinearGradient(cloudSize * 2.03166, cloudSize * 0.97722, cloudSize * 2.48388, cloudSize * 0.97722);
+            gradient.addColorStop(0.00, '#fff');
+            gradient.addColorStop(0.66, '#7f7f7f');
+            gradient.addColorStop(1.00, cfg.tint);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+
+            // Shadows (Lower-left arc)
+            ctx.globalAlpha = alpha * 0.05;
+            ctx.beginPath();
+            ctx.moveTo(cloudSize * 1.48888, cloudSize * 1.515);
+            ctx.bezierCurveTo(cloudSize * 1.52944, cloudSize * 1.615, cloudSize * 1.43333, cloudSize * 1.62666, cloudSize * 1.46833, cloudSize * 1.71833);
+            ctx.bezierCurveTo(cloudSize * 1.50777, cloudSize * 1.82111, cloudSize * 1.65111, cloudSize * 1.89166, cloudSize * 1.64222, cloudSize * 1.88888);
+            ctx.bezierCurveTo(cloudSize * 1.52055, cloudSize * 1.84944, cloudSize * 1.43222, cloudSize * 1.73333, cloudSize * 1.43222, cloudSize * 1.59555);
+            ctx.bezierCurveTo(cloudSize * 1.43222, cloudSize * 1.45, cloudSize * 1.53111, cloudSize * 1.32777, cloudSize * 1.66444, cloudSize * 1.29666);
+            ctx.bezierCurveTo(cloudSize * 1.67555, cloudSize * 1.29388, cloudSize * 1.43222, cloudSize * 1.37611, cloudSize * 1.48888, cloudSize * 1.515);
+            ctx.closePath();
+            gradient = ctx.createLinearGradient(cloudSize * 1.665, cloudSize * 1.59277, cloudSize * 1.43222, cloudSize * 1.59277);
+            gradient.addColorStop(0.00, '#fff');
+            gradient.addColorStop(0.66, '#7f7f7f');
+            gradient.addColorStop(1.00, cfg.tint);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+
+            // Shadows (Lower-right arc)
+            ctx.globalAlpha = alpha * 0.02;
+            ctx.beginPath();
+            ctx.moveTo(cloudSize * 2.79277, cloudSize * 1.46111);
+            ctx.bezierCurveTo(cloudSize * 2.82, cloudSize * 1.525, cloudSize * 2.85388, cloudSize * 1.58555, cloudSize * 2.86777, cloudSize * 1.6);
+            ctx.bezierCurveTo(cloudSize * 3.07555, cloudSize * 1.82055, cloudSize * 2.69777, cloudSize * 1.88777, cloudSize * 2.78055, cloudSize * 1.88777);
+            ctx.bezierCurveTo(cloudSize * 2.94444, cloudSize * 1.88777, cloudSize * 3.07722, cloudSize * 1.755, cloudSize * 3.07722, cloudSize * 1.59111);
+            ctx.bezierCurveTo(cloudSize * 3.07722, cloudSize * 1.42722, cloudSize * 2.94444, cloudSize * 1.29444, cloudSize * 2.78055, cloudSize * 1.29444);
+            ctx.bezierCurveTo(cloudSize * 2.73555, cloudSize * 1.29444, cloudSize * 2.75833, cloudSize * 1.38, cloudSize * 2.79277, cloudSize * 1.46111);
+            ctx.closePath();
+            gradient = ctx.createLinearGradient(cloudSize * 2.75555, cloudSize * 1.59111, cloudSize * 3.07722, cloudSize * 1.59111);
+            gradient.addColorStop(0.00, 'rgba(255, 255, 255, 0)');
+            gradient.addColorStop(0.35, 'rgba(127, 127, 127, 25)');
+            gradient.addColorStop(1.00, cfg.tint);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            ctx.restore();
+            ctx.translate(transX * -1, transY * -1);
         };
     };
 };
