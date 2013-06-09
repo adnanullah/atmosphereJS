@@ -426,7 +426,7 @@ Atmosphere.Moon = function (context, x, y, ratio, tint) {
             ctx.globalAlpha = alpha * 0.75;
             ctx.beginPath();
             ctx.moveTo(moonSize * 0.01666, moonSize * 0.85888)
-            ctx.bezierCurveTo(moonSize * 0.00888, moonSize * 0.77555, moonSize * 0.10111, moonSize * 0.65277, moonSize * 0.11944, moonSize * 0.58388);
+            ctx.bezierCurveTo(moonSize * 0.01888, moonSize * 0.77555, moonSize * 0.10111, moonSize * 0.65277, moonSize * 0.11944, moonSize * 0.58388);
             ctx.bezierCurveTo(moonSize * 0.13444, moonSize * 0.52666, moonSize * 0.20833, moonSize * 0.50777, moonSize * 0.24611, moonSize * 0.46111);
             ctx.bezierCurveTo(moonSize * 0.29, moonSize * 0.40722, moonSize * 0.41, moonSize * 0.34666, moonSize * 0.47333, moonSize * 0.33055);
             ctx.bezierCurveTo(moonSize * 0.35277, moonSize * 0.38055, moonSize * 0.45277, moonSize * 0.35611, moonSize * 0.34666, moonSize * 0.41777);
@@ -475,8 +475,7 @@ Atmosphere.Moon = function (context, x, y, ratio, tint) {
             ctx.bezierCurveTo(moonSize * 0.37777, moonSize * 1.41888, moonSize * 0.37555, moonSize * 1.385, moonSize * 0.37277, moonSize * 1.35277);
             ctx.bezierCurveTo(moonSize * 0.36777, moonSize * 1.30222, moonSize * 0.36055, moonSize * 1.25555, moonSize * 0.30666, moonSize * 1.26499);
             ctx.bezierCurveTo(moonSize * 0.31, moonSize * 1.34777, moonSize * 0.25777, moonSize * 1.34055, moonSize * 0.18333, moonSize * 1.33111);
-            ctx.bezierCurveTo(moonSize * 0.1, moonSize * 1.32111, moonSize * 0.06055, moonSize * 1.30222, moonSize * 0.02777, moonSize * 1.23722);
-            ctx.bezierCurveTo(moonSize * -0.00667, moonSize * 1.16889, moonSize * 0.00333, moonSize * 0.97, moonSize * 0.00278, moonSize * 0.93111);
+            ctx.bezierCurveTo(moonSize * 0.1, moonSize * 1.32111, moonSize * 0.06055, moonSize * 1.10222, moonSize * 0.06777, moonSize * 1.23722);
             ctx.bezierCurveTo(moonSize * 0.00222, moonSize * 1.00055, moonSize * 0.01555, moonSize * 0.95166, moonSize * 0.01666, moonSize * 0.85888);
             ctx.fillStyle = 'rgb(50, 50, 50)';
             ctx.fill();
